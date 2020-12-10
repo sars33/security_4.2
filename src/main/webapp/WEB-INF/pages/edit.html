@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<div align="center">
+    <form action="/edit" method="POST">
+        <input type="hidden" name="id" th:value="${user.id}">
+
+        <label for="name"><strong>First name</strong></label><br>
+        <input type="text" name="name" id="name" size="50" th:value="${user.name}"><br>
+        <label for="last_name"><strong>Last name</strong></label><br>
+        <input type="text" name="lastName" id="last_name" size="50" th:value="${user.lastName}"><br>
+        <label for="email"><strong>Email</strong></label><br>
+        <input type="text" name="email" id="email" size="50" th:value="${user.email}"><br><br>
+
+        <style>
+            .button {
+                height: 30px;
+                width: 200px;
+                font-size: 15px;
+                position: relative;
+            }
+        </style>
+        <button name="submit" type="submit" id="edit-btn" class="button">Edit</button>
+    </form>
+</div>
+</body>
+</html>
