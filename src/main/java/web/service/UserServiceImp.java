@@ -3,6 +3,7 @@ package web.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
+import web.model.Role;
 import web.model.User;
 
 import java.util.List;
@@ -44,6 +45,16 @@ public class UserServiceImp implements UserService {
     @Override
     public User getById(Long id) {
         return userDao.getById(id);
+    }
+
+    @Override
+    public User getUserByName(String login) {
+        return userDao.getUserByName(login);
+    }
+
+    @Override
+    public Role getRoleByName(String role) {
+        return userDao.getRoleByName(role);
     }
 }
 
