@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 70%;
+    }
+
+    table {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    #t01 th {
+        background-color: #bbbbbb;
+        color: black;
+    }
+</style>
+<body>
+<div align="center">
+    <h1>All Users</h1>
+
+    <table th:border="1" id="t01">
+        <tbody>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.id}"/>
+                <td th:text="${user.name}"/>
+                <td th:text="${user.lastName}"/>
+                <td th:text="${user.email}"/>
+                <td th:text="${user.roles}"/>
+                <td th:text="${user.getLogin()}"/>
+                <td th:text="${user.getPassword()}"/>
+                <td>
+                    <a th:href="@{/admin/users/{userId}/edit(userId=${user.id})}">Edit</a>
+                    <a th:href="@{/admin/users/{userId}/delete(userId=${user.id})}">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+    <form action="/add">
+        <h3>
+            <a th:href="@{/admin/users/add}"><strong>ADD USER</strong></a>
+        </h3>
+        <br>
+        <h2><a th:href="@{/logout}"> Logout </a></h2>
+
+    </form>
+</div>
+</body>
+</html>
