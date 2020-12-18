@@ -34,23 +34,26 @@
             <th>Last Name</th>
             <th>Email</th>
             <th>Roles</th>
+            <th>Login</th>
+            <th>Password</th>
         </tr>
-        <th:block th:each="user : ${users}">
-            <tr>
-                <td th:text="${user.id}"/>
-                <td th:text="${user.name}"/>
-                <td th:text="${user.lastName}"/>
-                <td th:text="${user.email}"/>
-                <td th:text="${user.roles}"/>
-                <td th:text="${user.getLogin()}"/>
-                <td th:text="${user.getPassword()}"/>
-                <td>
-                    <a th:href="@{/admin/users/{userId}/edit(userId=${user.id})}">Edit</a>
-                    <a th:href="@{/admin/users/{userId}/delete(userId=${user.id})}">Delete</a>
-                </td>
-            </tr>
-        </th:block>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}"></td>
+
+            <!-- <td th:text="${user.getId()}"></td>-->
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getRoles()}"></td>
+            <td><a th:href="@{/admin/users/{userId}/edit(userId=${user.id})}" th:utext="${user.getUsername()}"></a></td>
+            <!--  <td th:text="${user.getLogin()}"></td>-->
+            <td th:text="${user.getPassword()}"></td>
+            <td><a th:href="@{/admin/users/{userId}/edit(userId=${user.id})}">Edit</a>
+                <a th:href="@{/admin/users/{userId}/delete(userId=${user.id})}">Delete</a></td>
+        </tr>
+
     </table>
+
     <form action="/add">
         <h3>
             <a th:href="@{/admin/users/add}"><strong>ADD USER</strong></a>

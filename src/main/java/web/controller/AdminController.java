@@ -1,6 +1,9 @@
 package web.controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.Role;
@@ -41,7 +44,7 @@ public class AdminController {
     }
 
     @GetMapping(value = "users/{userId}/edit")
-    public String editUser(@PathVariable("userId") Long id, ModelMap model) {
+    public String editUser(@PathVariable("userId") Long id, Model model) {
         User user = userService.getById(id);
         model.addAttribute("user", user);
         return "edit";
@@ -49,8 +52,8 @@ public class AdminController {
 
     @PostMapping(value = "users/{userId}/edit")
     public String editUser(@ModelAttribute("user") User user, @PathVariable("userId") Long id) {
-        Set<Role> roles = new HashSet<>();
         userService.edit(user);
+
         return "redirect:/admin/";
     }
 

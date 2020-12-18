@@ -6,13 +6,13 @@
 </head>
 <body>
 <div align="center">
-    <a th:href="@{/admin/users}">Back to Users List</a>
+    <a th:href="@{/admin/users}">Back to Users List</a><br>
     <br>
     <form th:action="@{/admin/users/{userId}/edit(userId=${user.id})}"
           th:object="${user}" method="POST">
 
 
-        <input type="hidden" name="id" th:value="${user.id}">
+       <input type="hidden" name="id" th:value="${user.id}">
 
         <label for="name"><strong>First name</strong></label><br>
         <input type="text" name="name" id="name" size="50" th:value="${user.name}"><br>
@@ -20,11 +20,13 @@
         <input type="text" name="lastName" id="last_name" size="50" th:value="${user.lastName}"><br>
         <label for="email"><strong>Email</strong></label><br>
         <input type="text" name="email" id="email" size="50" th:value="${user.email}"><br>
+        <input type="hidden" name="login" th:value="${user.login}">
+       <input type="hidden" name="roles" th:field="*{roles}">
         <label for="password"><strong> Edit Password</strong></label><br>
-        <input type="text" name="password" id="password" size="50" th:value="${user.password}"><br>
+        <input type="password" name="password" id="password" size="50" th:value="${user.getPassword()}"><br>
 
         <br>
-
+        </table>
         <style>
             .button {
                 height: 30px;
