@@ -44,13 +44,7 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public void edit(User user) {
-
-        if (!user.getPassword().matches(user.getPassword()) || user.getPassword().isEmpty()) {
-            user.setPassword(user.getPassword());
-        } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userDao.edit(user);
-        }
+        userDao.edit(user);
     }
 
     @Transactional

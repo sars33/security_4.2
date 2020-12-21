@@ -1,18 +1,14 @@
 package web.controller;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import web.model.Role;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin/")
@@ -52,6 +48,19 @@ public class AdminController {
 
     @PostMapping(value = "users/{userId}/edit")
     public String editUser(@ModelAttribute("user") User user, @PathVariable("userId") Long id) {
+        User dbUser = userService.getById(id);
+        user.getId();
+
+        if (user.getPassword().equals(dbUser.getPassword()) || user.getPassword().isEmpty()) {
+            user.setName(user.getName());
+            user.setLastName(user.getLastName());
+            user.setEmail(user.getEmail());
+            user.setPassword(dbUser.getPassword());
+
+        } else {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }
+
         userService.edit(user);
 
         return "redirect:/admin/";

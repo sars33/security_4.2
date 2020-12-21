@@ -1,5 +1,6 @@
 package web.dao;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
@@ -34,8 +35,11 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void edit(User user) {
-        entityManager.merge(user);
-    }
+
+                entityManager.merge(user);
+            }
+
+
 
     @Override
     public User getById(Long id) {
