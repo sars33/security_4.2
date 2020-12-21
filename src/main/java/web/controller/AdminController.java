@@ -49,16 +49,13 @@ public class AdminController {
     @PostMapping(value = "users/{userId}/edit")
     public String editUser(@ModelAttribute("user") User user, @PathVariable("userId") Long id) {
         User dbUser = userService.getById(id);
-        user.getId();
 
-        if (user.getPassword().equals(dbUser.getPassword()) || user.getPassword().isEmpty()) {
-            user.setName(user.getName());
-            user.setLastName(user.getLastName());
-            user.setEmail(user.getEmail());
+        if(user.getPassword().isEmpty()) {
             user.setPassword(dbUser.getPassword());
-
-        } else {
+//
+        } else if (!user.getPassword().equals(dbUser.getPassword())) {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
         }
 
         userService.edit(user);
